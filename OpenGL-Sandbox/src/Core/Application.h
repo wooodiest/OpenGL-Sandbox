@@ -21,6 +21,10 @@ namespace OpenGL {
 		void Shutdown();
 
 	private:
+		void BeginImGuiFrame();
+		void EndImGuiFrame();
+
+	private:
 		GLFWwindow* m_Window = nullptr;
 		std::string m_Name;
 		uint32_t m_WindowWidth, m_WindowHeight;

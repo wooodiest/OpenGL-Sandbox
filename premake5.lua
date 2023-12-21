@@ -8,6 +8,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 group "Dependencies"
     include "OpenGL-Sandbox/vendor/glfw"
     include "OpenGL-Sandbox/vendor/Glad"
+    include "OpenGL-Sandbox/vendor/imgui"
 group ""
 
 project "OpenGL-Sandbox"
@@ -43,13 +44,15 @@ project "OpenGL-Sandbox"
         "%{prj.name}/vendor/glfw/include",
         "%{prj.name}/vendor/Glad/include",
         "%{prj.name}/vendor/glm",
-        "%{prj.name}/vendor/stb_image"
+        "%{prj.name}/vendor/stb_image",
+        "%{prj.name}/vendor/imgui"
     }
 
     links
     {
         "GLFW",
         "Glad",
+        "ImGui",
         "opengl32.lib"
     }
 
