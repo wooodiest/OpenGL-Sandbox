@@ -1,3 +1,6 @@
 [submodule "OpenGL-Sandbox/vendor/glfw"]
 	path = OpenGL-Sandbox/vendor/glfw
 	url = https://github.com/wooodiest/glfw
+[submodule "OpenGL-Sandbox/vendor/glm"]
+	path = OpenGL-Sandbox/vendor/glm
+	url = https://github.com/wooodiest/glm

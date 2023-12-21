@@ -23,7 +23,11 @@ project "OpenGL-Sandbox"
     files
     {
         "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp"
+        "%{prj.name}/src/**.cpp",
+        "%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl",
+        "%{prj.name}/vendor/stb_image/**.h",
+		"%{prj.name}/vendor/stb_image/**.cpp"
     }
 
     defines
@@ -37,7 +41,9 @@ project "OpenGL-Sandbox"
         "%{prj.name}/src",
         "%{prj.name}/vendor",
         "%{prj.name}/vendor/glfw/include",
-        "%{prj.name}/vendor/Glad/include"
+        "%{prj.name}/vendor/Glad/include",
+        "%{prj.name}/vendor/glm",
+        "%{prj.name}/vendor/stb_image"
     }
 
     links

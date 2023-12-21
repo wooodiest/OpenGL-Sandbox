@@ -53,7 +53,6 @@ namespace OpenGL {
 			glClearColor(0.5f, 0.3f, 0.9f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			std::cout << m_DeltaTime << std::endl;
 
 			glfwSwapBuffers(m_Window);
 			glfwPollEvents();
