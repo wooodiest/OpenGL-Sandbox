@@ -7,6 +7,8 @@
 #include <imgui/backends/imgui_impl_glfw.h>
 #include <imgui/backends/imgui_impl_opengl3.h>
 
+#include "Tests/ExampleTest.h"
+
 namespace OpenGL {
 
 	Application* Application::s_Instance = nullptr;
@@ -16,10 +18,16 @@ namespace OpenGL {
 	{
 		s_Instance = this;
 		Init();
+
+		m_TestMenu = new TestMenu(m_CurrentTest);
+		m_CurrentTest = m_TestMenu;
+
+		m_TestMenu->RegisterTest<ExampleTest>("Example");
 	}
 
 	Application::~Application()
 	{
+		Shutdown();
 	}
 
 	void Application::Init()
@@ -67,7 +75,6 @@ namespace OpenGL {
 
 		ImGui_ImplGlfw_InitForOpenGL(m_Window, true);
 		ImGui_ImplOpenGL3_Init("#version 410");
-
 	}
 
 	void Application::Run()
@@ -80,13 +87,23 @@ namespace OpenGL {
 			m_DeltaTime = m_DeltaTime > (1.0f / 60.0f) ? (1.0f / 60.0f) : m_DeltaTime;
 			m_LastFrameTime = time;
 
-			// Rendering
-			glClearColor(0.5f, 0.3f, 0.9f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
-
 			// ImGui
 			BeginImGuiFrame();
-			ImGui::ShowDemoWindow();
+
+			if (m_CurrentTest)
+			{
+				// Tests menu
+				ImGui::Begin("Tests");
+				m_CurrentTest->OnUpdate(m_DeltaTime);
+				if (m_CurrentTest != m_TestMenu && ImGui::Button("<--", ImVec2(ImGui::GetWindowSize().x, 0.0f)))
+				{
+					delete m_CurrentTest;
+					m_CurrentTest = m_TestMenu;
+				}
+				m_CurrentTest->OnImGuiRender(m_DeltaTime);
+				ImGui::End();
+			}
+
 			EndImGuiFrame();
 
 			//
@@ -97,6 +114,11 @@ namespace OpenGL {
 
 	void Application::Shutdown()
 	{
+		delete m_CurrentTest;
+		if (m_CurrentTest != m_TestMenu)
+			delete m_TestMenu;
+		
+
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
 		glfwDestroyWindow(m_Window);

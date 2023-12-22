@@ -4,6 +4,8 @@
 
 #include <GLFW/glfw3.h>
 
+#include "Test.h"
+
 namespace OpenGL {
 
 	class Application
@@ -31,6 +33,9 @@ namespace OpenGL {
 
 		float m_LastFrameTime = 0.0f;
 		float m_DeltaTime = (1.0f / 60.0f);
+
+		Test* m_CurrentTest = nullptr;
+		TestMenu* m_TestMenu = nullptr;
 
 	private:
 		static Application* s_Instance;
