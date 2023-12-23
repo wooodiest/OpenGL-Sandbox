@@ -7,7 +7,8 @@
 #include <imgui/backends/imgui_impl_glfw.h>
 #include <imgui/backends/imgui_impl_opengl3.h>
 
-#include "Tests/ExampleTest.h"
+#include "Tests/GettingStarted/1/ExampleTest.h"
+#include "Tests/GettingStarted/2/ExampleTest2.h"
 
 namespace OpenGL {
 
@@ -23,7 +24,8 @@ namespace OpenGL {
 		m_TestMenu = new TestMenu(m_CurrentTest);
 		m_CurrentTest = m_TestMenu;
 
-		m_TestMenu->RegisterTest<ExampleTest>("Example");
+		m_TestMenu->RegisterTest<ExampleTest>("Example1");
+		m_TestMenu->RegisterTest<ExampleTest2>("Example2");
 	}
 
 	Application::~Application()

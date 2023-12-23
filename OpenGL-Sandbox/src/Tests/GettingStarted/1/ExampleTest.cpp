@@ -1,7 +1,11 @@
 #include "ExampleTest.h"
 
+#include "Core/Application.h"
+
 #include <Glad/glad.h>
+#include <GLFW/glfw3.h>
 #include <imgui/imgui.h>
+#include <glm/gtc/type_ptr.hpp>
 
 #include <string>
 #include <iostream>
@@ -51,9 +55,11 @@ namespace OpenGL {
 			#version 330 core
 			layout (location = 0) out vec4 color;
 			
+			uniform vec4 u_Color;
+
 			void main()
 			{
-				color = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+				color = u_Color;
 			}
 		)";
 		const char* vertexShader_CStr = vertexShader.c_str();
@@ -101,9 +107,6 @@ namespace OpenGL {
 		glDeleteShader(m_VertexShader);
 		glDeleteShader(m_FragmentShader);
 
-#if 0
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-#endif
 	}
 
 	ExampleTest::~ExampleTest()
@@ -112,10 +115,24 @@ namespace OpenGL {
 
 	void ExampleTest::OnUpdate(float dt)
 	{
+		if (glfwGetKey(Application::Get().GetWindow(), GLFW_KEY_A) == GLFW_PRESS)
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		}
+		else if (glfwGetKey(Application::Get().GetWindow(), GLFW_KEY_D) == GLFW_PRESS)
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		}
+
+		// Rendering
 		glClearColor(0.5f, 0.3f, 0.9f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glUseProgram(m_Shader);
+
+		int location = glGetUniformLocation(m_Shader, "u_Color");
+		glUniform4f(location, m_Color.r, m_Color.g, m_Color.b, m_Color.a);
+
 		glBindVertexArray(m_VertexArray);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
@@ -126,6 +143,7 @@ namespace OpenGL {
 
 	void ExampleTest::OnImGuiRender(float dt)
 	{
+		ImGui::ColorPicker4("Color", glm::value_ptr(m_Color));
 	}
 
 }

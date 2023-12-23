@@ -16,7 +16,7 @@ namespace OpenGL {
 		~Application();
 
 		static Application& Get() { return *s_Instance; }
-		GLFWwindow& GetWindow() { return *m_Window; }
+		GLFWwindow* GetWindow() { return m_Window; }
 		float GetDeltaTime() const { return m_DeltaTime; }
 		glm::vec2 GetViewPortSize() { return { m_WindowWidth, m_WindowHeight }; }
 		void SetViewPortSize(const glm::vec2& v) { m_WindowWidth = v.x; m_WindowHeight = v.y; }
