@@ -12,6 +12,7 @@
 namespace OpenGL {
 
 	Application* Application::s_Instance = nullptr;
+	void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 	Application::Application(std::string& name, uint32_t width, uint32_t height)
 		: m_Name(name), m_WindowWidth(width), m_WindowHeight(height)
@@ -49,7 +50,7 @@ namespace OpenGL {
 			std::cout << "Cannot initialize glad" << std::endl;
 			Shutdown();
 		}
-
+		glfwSetFramebufferSizeCallback(m_Window, framebuffer_size_callback);
 		glfwSwapInterval(1);
 
 		// Setup Dear ImGui context
@@ -146,6 +147,12 @@ namespace OpenGL {
 			ImGui::RenderPlatformWindowsDefault();
 			glfwMakeContextCurrent(backup_current_context);
 		}
+	}
+
+	void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+	{
+		glViewport(0, 0, width, height);
+		Application::Get().SetViewPortSize({ width, height });
 	}
 
 }
