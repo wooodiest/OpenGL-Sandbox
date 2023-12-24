@@ -7,11 +7,11 @@
 
 namespace OpenGL {
 
-	class ExampleTest2 : public Test
+	class Test_Shaders : public Test
 	{
 	public:
-		ExampleTest2();
-		virtual ~ExampleTest2();
+		Test_Shaders();
+		virtual ~Test_Shaders();
 
 		virtual void OnUpdate(float dt) override;
 		virtual void OnImGuiRender(float dt) override;

@@ -6,11 +6,11 @@
 
 namespace OpenGL {
 
-	class ExampleTest : public Test
+	class Test_HelloTriangle : public Test
 	{
 	public:
-		ExampleTest();
-		virtual ~ExampleTest();
+		Test_HelloTriangle();
+		virtual ~Test_HelloTriangle();
 
 		virtual void OnUpdate(float dt) override;
 		virtual void OnImGuiRender(float dt) override;

@@ -21,11 +21,12 @@ namespace OpenGL {
 	}
 
 	void TestMenu::OnImGuiRender(float dt)
-	{
+	{	
 		for (auto& test : m_Tests)
 		{
 			if (ImGui::Button(test.first.c_str(), ImVec2(ImGui::GetWindowSize().x, 0.0f)))
 				m_CurrentTest = test.second();
+			
 		}
 	}
 

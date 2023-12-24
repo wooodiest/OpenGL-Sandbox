@@ -99,4 +99,10 @@ namespace OpenGL {
 		glUniform4f(location, v.x, v.y, v.z, v.w);
 	}
 
+	void Shader::SetInt(const std::string& name, int v)
+	{
+		int location = glGetUniformLocation(m_RendererID, name.c_str());
+		glUniform1i(location, v);
+	}
+
 }

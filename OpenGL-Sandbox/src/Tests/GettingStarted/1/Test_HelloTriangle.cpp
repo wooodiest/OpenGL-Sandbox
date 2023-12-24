@@ -1,4 +1,4 @@
-#include "ExampleTest.h"
+#include "Test_HelloTriangle.h"
 
 #include "Core/Application.h"
 
@@ -12,7 +12,7 @@
 
 namespace OpenGL {
 
-	ExampleTest::ExampleTest()
+	Test_HelloTriangle::Test_HelloTriangle()
 	{
 		// Create vertex array
 		glGenVertexArrays(1, &m_VertexArray);
@@ -22,12 +22,10 @@ namespace OpenGL {
 		float verticies[] = {
 			-0.5f, -0.5f, 0.0f,
 			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f
+			 0.0f,  0.5f, 0.0f,
 		};
 		unsigned int indices[] {
-			0, 1, 2,
-			0, 2, 3
+			0, 1, 2
 		};
 
 		glGenBuffers(1, &m_VertexBuffer);
@@ -109,11 +107,15 @@ namespace OpenGL {
 
 	}
 
-	ExampleTest::~ExampleTest()
+	Test_HelloTriangle::~Test_HelloTriangle()
 	{
+		glDeleteProgram(m_Shader);
+		glDeleteBuffers(1, &m_VertexBuffer);
+		glDeleteBuffers(1, &m_IndexBuffer);
+		glDeleteVertexArrays(1, &m_VertexArray);
 	}
 
-	void ExampleTest::OnUpdate(float dt)
+	void Test_HelloTriangle::OnUpdate(float dt)
 	{
 		if (glfwGetKey(Application::Get().GetWindow(), GLFW_KEY_A) == GLFW_PRESS)
 		{
@@ -125,7 +127,7 @@ namespace OpenGL {
 		}
 
 		// Rendering
-		glClearColor(0.5f, 0.3f, 0.9f, 1.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glUseProgram(m_Shader);
@@ -135,13 +137,13 @@ namespace OpenGL {
 
 		glBindVertexArray(m_VertexArray);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 
 		glBindVertexArray(0);
 		glUseProgram(0);
 	}
 
-	void ExampleTest::OnImGuiRender(float dt)
+	void Test_HelloTriangle::OnImGuiRender(float dt)
 	{
 		ImGui::ColorPicker4("Color", glm::value_ptr(m_Color));
 	}

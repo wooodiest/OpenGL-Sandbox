@@ -1,4 +1,4 @@
-#include "ExampleTest2.h"
+#include "Test_Shaders.h"
 
 #include "Core/Application.h"
 
@@ -12,7 +12,7 @@
 
 namespace OpenGL {
 
-	ExampleTest2::ExampleTest2()
+	Test_Shaders::Test_Shaders()
 	{
 		// Create vertex array
 		glGenVertexArrays(1, &m_VertexArray);
@@ -44,12 +44,16 @@ namespace OpenGL {
 		m_Shader = new Shader("src/Tests/GettingStarted/2/shader.vertex.glsl", "src/Tests/GettingStarted/2/shader.fragment.glsl");
 	}
 
-	ExampleTest2::~ExampleTest2()
+	Test_Shaders::~Test_Shaders()
 	{
 		delete m_Shader;
+
+		glDeleteBuffers(1, &m_VertexBuffer);
+		glDeleteBuffers(1, &m_IndexBuffer);
+		glDeleteVertexArrays(1, &m_VertexArray);
 	}
 
-	void ExampleTest2::OnUpdate(float dt)
+	void Test_Shaders::OnUpdate(float dt)
 	{
 		if (glfwGetKey(Application::Get().GetWindow(), GLFW_KEY_A) == GLFW_PRESS)
 		{
@@ -75,7 +79,7 @@ namespace OpenGL {
 		glUseProgram(0);
 	}
 
-	void ExampleTest2::OnImGuiRender(float dt)
+	void Test_Shaders::OnImGuiRender(float dt)
 	{
 		ImGui::ColorPicker4("Color", glm::value_ptr(m_Color));
 	}

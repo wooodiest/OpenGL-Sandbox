@@ -14,6 +14,7 @@ namespace OpenGL {
 		void Bind();
 
 		void SetFloat4(const std::string& name, const glm::vec4& v);
+		void SetInt(const std::string& name, int v);
 
 	private:
 		int m_RendererID;
