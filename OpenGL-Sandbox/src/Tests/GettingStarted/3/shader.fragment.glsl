@@ -15,7 +15,7 @@ void main()
 	switch(int(v_TexIndex))
 	{
 		 case 0: texColor *= texture(u_Texture0, v_TexCoord); break;
-		case 1: texColor *= texture(u_Texture1, v_TexCoord); break;
+		 case 1: texColor *= texture(u_Texture1, v_TexCoord); break;
 	}
 	color = texColor; 
 }

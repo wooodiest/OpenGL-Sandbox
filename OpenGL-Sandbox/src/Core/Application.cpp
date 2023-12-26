@@ -10,6 +10,7 @@
 #include "Tests/GettingStarted/1/Test_HelloTriangle.h"
 #include "Tests/GettingStarted/2/Test_Shaders.h"
 #include "Tests/GettingStarted/3/Test_Textures.h"
+#include "Tests/GettingStarted/4/Test_Transformation.h"
 
 namespace OpenGL {
 
@@ -28,6 +29,7 @@ namespace OpenGL {
 		m_TestMenu->RegisterTest<Test_HelloTriangle>("HelloTriangle");
 		m_TestMenu->RegisterTest<Test_Shaders>("Shaders");
 		m_TestMenu->RegisterTest<Test_Textures>("Textures");
+		m_TestMenu->RegisterTest<Test_Transformation>("Transformation");
 	}
 
 	Application::~Application()

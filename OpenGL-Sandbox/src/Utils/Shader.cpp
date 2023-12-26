@@ -1,6 +1,8 @@
 #include "Shader.h"
 
 #include <Glad/glad.h>
+#include <glm/gtc/type_ptr.hpp>
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -97,6 +99,12 @@ namespace OpenGL {
 	{
 		int location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform4f(location, v.x, v.y, v.z, v.w);
+	}
+
+	void Shader::SetMat4(const std::string& name, const glm::mat4& v)
+	{
+		int location = glGetUniformLocation(m_RendererID, name.c_str());
+		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(v));
 	}
 
 	void Shader::SetInt(const std::string& name, int v)
